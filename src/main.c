@@ -45,6 +45,7 @@ int main(void)
 
 	 GPIO_InitTypeDef gpioStuct;
 	 uint8_t Button;
+	 uint8_t oldButtonval=1;
 
 	 gpioStuct.GPIO_Mode=GPIO_Mode_OUT;
 	 gpioStuct.GPIO_OType=GPIO_OType_PP;
@@ -66,7 +67,20 @@ int main(void)
   while (1)
   {
 	  Button=GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
-	  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Button);
+	  if((oldButtonval==1)&&(Button==0))
+	  {
+		  delay(10000);
+		  Button=GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
+		  if(Button==0)
+		  {
+			  GPIO_ToggleBits(GPIOA,GPIO_Pin_5);
+
+		  }
+	  }
+	  oldButtonval=Button;
+
+	  /*Button=GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
+	  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Button);*/
 
 	  /*GPIO_SetBits(GPIOA,GPIO_Pin_5);
 	  delay(1000000);
