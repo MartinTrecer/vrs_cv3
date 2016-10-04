@@ -48,6 +48,12 @@ int main(void)
      GPIO_SetBits(GPIOA,GPIO_Pin_5);
 	 GPIO_ResetBits(GPIOA,GPIO_Pin_5);
 
+	 gpioStuct.GPIO_Mode=GPIO_Mode_IN;
+	 gpioStuct.GPIO_Pin=GPIO_Pin_13;
+	 gpioStuct.GPIO_PuPd=GPIO_PuPd_NOPULL;
+	 gpioStuct.GPIO_Speed=GPIO_Speed_40MHz;
+	 GPIO_Init(GPIOC,&gpioStuct);
+
 
   while (1)
   {
