@@ -30,6 +30,12 @@ SOFTWARE.
 #include <stddef.h>
 #include "stm32l1xx.h"
 
+void delay(uint32_t cas)
+{
+	uint32_t i;
+	for(i=0;i<cas;i++);
+}
+
 
 int main(void)
 {
@@ -59,7 +65,11 @@ int main(void)
 
   while (1)
   {
-	  Button=GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
+	  //Button=GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
+	  GPIO_SetBits(GPIOA,GPIO_Pin_5);
+	  delay(1000000);
+	  GPIO_ResetBits(GPIOA,GPIO_Pin_5);
+	  delay(1000000);
   }
   return 0;
 }
